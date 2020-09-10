@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Anton Shafner](https://up.htmlacademy.ru/ecmascript/12/user/271813).
-* Наставник: `Неизвестно`.
+* Наставник: [Anton Shafner](https://up.htmlacademy.ru/ecmascript/12/user/271813).
 
 ---
 
