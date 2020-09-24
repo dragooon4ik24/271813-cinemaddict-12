@@ -1,6 +1,6 @@
-import {getModifiedDuration, getModifiedDescription} from "../utils";
+import {getModifiedDuration, getModifiedDescription, createElement} from "../utils";
 
-export const createCardFilmTemplate = ({
+const createCardFilmTemplate = ({
   title,
   rating,
   release,
@@ -31,3 +31,26 @@ export const createCardFilmTemplate = ({
   </form>
   </article>`;
 };
+
+export default class CardFilm {
+  constructor(card) {
+    this._card = card;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createCardFilmTemplate(this._card);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
