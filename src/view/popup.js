@@ -1,6 +1,6 @@
-import {getModifiedDuration, getFormattedDate} from "../utils";
+import {createElement, getModifiedDuration, getFormattedDate} from "../utils";
 
-export const createPopupTemplate = ({
+const createPopupTemplate = ({
   title,
   originalTitle,
   rating,
@@ -148,3 +148,26 @@ export const createPopupTemplate = ({
   </form>
 </section>`;
 };
+
+export default class Popup {
+  constructor(card) {
+    this._card = card;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createPopupTemplate(this._card);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
