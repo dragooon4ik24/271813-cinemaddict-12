@@ -137,7 +137,6 @@ export default class Movies {
   _renderFilmList() {
     render(this._movieContainer, this._mainFilmsComponent, RenderPosition.BEFOREEND);
     this._renderCards(0, Math.min(this._cards.length, CARD_COUNT_PER_STEP), this._mainFilmsComponent.getContainerForCards());
-    console.log(this._cards);
 
     if (this._cards.length > CARD_COUNT_PER_STEP) {
       this._renderShowMoreButton();
