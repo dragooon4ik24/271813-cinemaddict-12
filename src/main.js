@@ -5,7 +5,7 @@ import MenuView from "./view/menu";
 import {generateCardData} from "./mock/card";
 import {generateFilter} from "./mock/filter";
 
-const COUNT_FILMS = 0;
+const COUNT_FILMS = 20;
 
 const cards = new Array(COUNT_FILMS).fill().map(generateCardData);
 const filters = generateFilter(cards);

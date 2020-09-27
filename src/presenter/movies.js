@@ -7,6 +7,8 @@ import MostCommentedFilmsView from "../view/most-commented-films";
 import CardFilmView from "../view/card-film";
 import PopupView from "../view/popup";
 import ShowMoreButtonView from "../view/show-more-button";
+import {SortType} from "../const";
+import {sortDateUp, sortRatingUp} from "../utils/card";
 
 const CARD_COUNT_PER_STEP = 5;
 
@@ -14,6 +16,7 @@ export default class Movies {
   constructor(movieContainer) {
     this._movieContainer = movieContainer;
     this._renderedCardCount = CARD_COUNT_PER_STEP;
+    this._currentSortType = SortType.DEFAULT;
 
     this._sortComponent = new SortView();
     this._mainFilmsComponent = new MainFilmsView();
@@ -27,10 +30,12 @@ export default class Movies {
     this._footer = null;
 
     this._handleShowMoreButtonClick = this._handleShowMoreButtonClick.bind(this);
+    this._handleSortTypeChange = this._handleSortTypeChange.bind(this);
   }
 
   init(cards) {
     this._cards = cards.slice();
+    this._sourcedCards = cards.slice();
 
     this._header = document.querySelector(`.header`);
     this._footer = document.querySelector(`.footer`);
@@ -52,8 +57,39 @@ export default class Movies {
     this._showMoreButtonComponent.setClickHandler(this._handleShowMoreButtonClick);
   }
 
+  _sortCards(sortType) {
+    switch (sortType) {
+      case SortType.DATE:
+        this._cards.sort(sortDateUp);
+        break;
+      case SortType.RATING:
+        this._cards.sort(sortRatingUp);
+        break;
+      default:
+        this._cards = this._sourcedCards.slice();
+    }
+
+    this._currentSortType = sortType;
+  }
+
+  _clearTaskList() {
+    this._mainFilmsComponent.getContainerForCards().innerHTML = ``;
+    this._renderedCardCount = CARD_COUNT_PER_STEP;
+  }
+
+  _handleSortTypeChange(sortType) {
+    if (this._currentSortType === sortType) {
+      return;
+    }
+
+    this._sortCards(sortType);
+    this._clearTaskList();
+    this._renderFilmList();
+  }
+
   _renderSort() {
     render(this._movieContainer, this._sortComponent, RenderPosition.BEFOREEND);
+    this._sortComponent.setSortTypeChangeHandler(this._handleSortTypeChange);
   }
 
   _renderCard(card, container) {

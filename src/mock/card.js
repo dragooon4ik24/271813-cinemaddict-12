@@ -98,7 +98,7 @@ const getDescription = () => {
 };
 
 const getReleaseDate = () => ({
-  date: new Date(),
+  date: new Date(new Date().getTime() + getRandomNumber(10000, 100000)),
   country: getRandomElementFromArray(COUNTRIES),
 });
 
