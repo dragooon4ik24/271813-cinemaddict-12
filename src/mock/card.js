@@ -2,7 +2,7 @@ import {
   getRandomNumber,
   getShuffledArray,
   getRandomElementFromArray,
-} from "../utils.js";
+} from "../utils/common";
 
 const FILMS_NAMES = [
   `The Dance of Life`,

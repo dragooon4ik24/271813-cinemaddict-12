@@ -1,4 +1,4 @@
-import {createElement} from "../utils";
+import AbstractView from "./abstract";
 
 const createMenuTemplate = (filters) => `<nav class="main-navigation">
 <div class="main-navigation__items">
@@ -15,25 +15,13 @@ const createMenuTemplate = (filters) => `<nav class="main-navigation">
 <a href="#stats" class="main-navigation__additional">Stats</a>
 </nav>`;
 
-export default class Menu {
+export default class Menu extends AbstractView {
   constructor(filters) {
-    this._element = null;
+    super();
     this._filters = filters;
   }
 
   getTemplate() {
     return createMenuTemplate(this._filters);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
